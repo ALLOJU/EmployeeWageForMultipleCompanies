@@ -1,26 +1,33 @@
 package com.bridgelabz;
 
 public class EmployeeWageForMultipleCompanies {
-	
-	//Method to check whether employee present or not
-	private static void checkEmpPresentOrNot(int is_fulltime) {
-		//Generate random number for 0 for absent 1 for present
-		int empCheck=(int)Math.floor(Math.random()*10) % 2;
-		//System.out.println(empCheck);
 
-		//if condition to check employee is present for the input is_fulltime=1
-		if(empCheck==is_fulltime) {
-			System.out.println("Employee is Present");
-		}
-		//else condition to check employee is absent for the input is_fulltime=0
+	//constants
+	public static final int EMP_RATE_PER_HOUR=20;
+	//method to calculate daily employee wage of the employee
+	private static void calculateDailyWage(int is_fulltime) {
+
+
+		//variables
+		int empHrs=0;
+		int empWage=0;
+		int empCheck=0;
+
+		empCheck=(int)Math.floor(Math.random()*10) % 2;
+		//System.out.println(empCheck);
+		if(empCheck==is_fulltime) 
+			empHrs=8;
 		else
-			System.out.println("Employee is Absent");
+			empHrs=4;
+
+		empWage= EMP_RATE_PER_HOUR * empHrs;
+
+		System.out.println("Emp Wage is "+empWage);
+
 	}
 
-	
-	
-public static void main(String[] args) {
-	int is_fulltime=1;
-	checkEmpPresentOrNot(is_fulltime);
-}
+	public static void main(String[] args) {
+		int is_fulltime=1;
+		calculateDailyWage(is_fulltime);
+	}
 }
