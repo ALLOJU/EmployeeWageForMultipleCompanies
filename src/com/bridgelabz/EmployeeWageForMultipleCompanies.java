@@ -6,7 +6,7 @@ public class EmployeeWageForMultipleCompanies {
 	public static final int EMP_RATE_PER_HOUR=20;
 	//method to calculate daily employee wage of the employee
 	private static void calculateDailyWage() {
-		
+
 
 		//variables
 		final int fulltime=2;
@@ -17,21 +17,26 @@ public class EmployeeWageForMultipleCompanies {
 
 		empCheck=(int)Math.floor(Math.random()*10) % 3 ;
 		//System.out.println(empCheck);
-				if(empCheck==fulltime) 
-					empHrs=8;
-				else if(empCheck==parttime)
-					empHrs=4;
-				else
-					empHrs=0;
+		switch (empCheck){    
+		case 2:    
+			empHrs=8;
+			break;  //optional  
+		case 1:    
+			empHrs=4;
+			break; 
+		default:     
+			empHrs=0;  
+			break;
+		} 
 
-				empWage= EMP_RATE_PER_HOUR * empHrs;
+		empWage= EMP_RATE_PER_HOUR * empHrs;
 
-				System.out.println("Emp Wage is "+empWage);
+		System.out.println("Emp Wage is "+empWage);
 
 	}
 
 	public static void main(String[] args) {
-		
+
 		calculateDailyWage();
 	}
 }
