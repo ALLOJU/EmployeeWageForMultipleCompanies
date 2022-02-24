@@ -16,8 +16,6 @@ public class EmployeeWageForMultipleCompanies {
 		else
 			System.out.println("Employee is Absent");
 	}
-
-	
 	
 public static void main(String[] args) {
 	int is_fulltime=1;
