@@ -1,5 +1,10 @@
 package com.bridgelabz;
-public class EmployeeWageForMultipleCompanies {
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
+public class EmployeeWageForMultipleCompanies implements IComupteEmpWage {
 
 
 	//declaring constants
@@ -8,22 +13,30 @@ public class EmployeeWageForMultipleCompanies {
 
 	//declaring variables
 	private int numOfCompany=0;
-	private CompanyEmpWage[] companyEmpWageArray;
+	private LinkedList<CompanyEmpWage> companyEmpWageList;
+	private Map<String, CompanyEmpWage> companyEmpWageMap;
 
-	public EmployeeWageForMultipleCompanies(){
-		companyEmpWageArray=new CompanyEmpWage[5];
+	
+	public EmployeeWageForMultipleCompanies() {
+		companyEmpWageList=new LinkedList<>();
+		companyEmpWageMap=new HashMap<>();
 	}
-	private void addCompanyEmpWage(String company, int empRatePerour, int numOfWorkingDays, int maxHoursPerMonth) {
-		companyEmpWageArray[numOfCompany]=new CompanyEmpWage(company,empRatePerour,numOfWorkingDays,maxHoursPerMonth);
-		numOfCompany++;
+	public void addCompanyEmpWage(String company, int empRatePerour, int numOfWorkingDays, int maxHoursPerMonth) {
+		
+		CompanyEmpWage companyEmpWage=new CompanyEmpWage(company, empRatePerour, numOfWorkingDays, maxHoursPerMonth);
+		companyEmpWageList.add(companyEmpWage);
+		companyEmpWageMap.put(company, companyEmpWage);
+		
 	}
-	private void computeEmpWage() {
-		for(int i=0;i< numOfCompany;i++) {
-			companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-			System.out.println(companyEmpWageArray[i]);
+	public void computeEmpWage() {
+		for(int i=0;i< companyEmpWageList.size();i++) {
+		
+			CompanyEmpWage companyEmpWage=companyEmpWageList.get(i);
+			companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+			System.out.println(companyEmpWage);
 		}
 	}
-	private int computeEmpWage(CompanyEmpWage companyempwage) {
+	public int computeEmpWage(CompanyEmpWage companyempwage) {
 		//declaring variables
 		int empHours=0,totalEmpHours=0,totalWorkingDays=0;
 		while(totalEmpHours <= companyempwage.maxHoursPerMonth && totalWorkingDays <= companyempwage.numOfWorkingDays ) {
@@ -53,12 +66,17 @@ public class EmployeeWageForMultipleCompanies {
 	}
 
 	public static void main(String[] args) {
-		EmployeeWageForMultipleCompanies empwagecompany=new EmployeeWageForMultipleCompanies();
-		empwagecompany.addCompanyEmpWage("Dmart",20,2,10);
-		empwagecompany.addCompanyEmpWage("Reliance",10,4,20);
+		IComupteEmpWage empwagecompany=new EmployeeWageForMultipleCompanies();
+		empwagecompany.addCompanyEmpWage("Damrt",20,2,10);
+		//empwagecompany.addCompanyEmpWage("Reliance",10,4,20);
+		System.out.println("Total Employee wage "+empwagecompany.getTotalWage("Dmart"));
 		empwagecompany.computeEmpWage();
 
 
+	}
+	@Override
+	public int getTotalWage(String company) {
+		return companyEmpWageMap.get(company).totalEmpWage;
 	}
 
 
