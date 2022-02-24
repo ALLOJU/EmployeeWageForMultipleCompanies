@@ -1,6 +1,6 @@
 package com.bridgelabz;
+public class EmployeeWageForMultipleCompanies {
 
-public class EmployeeWageForMultipleCompanies{
 
 	//declaring constants
 	public static final int IS_PART_TIME=1;
@@ -15,7 +15,7 @@ public class EmployeeWageForMultipleCompanies{
 	private final int numOfWorkingDays;
 	private final int maxHoursPerMonth;
 
-	//created parametrized constructor
+
 	public EmployeeWageForMultipleCompanies(String company, int empRatePerour, int numOfWorkingDays, int maxHoursPerMonth) {
 		super();
 		this.company = company;
@@ -25,16 +25,14 @@ public class EmployeeWageForMultipleCompanies{
 	}
 
 
-	public static void main(String[] args) {
-		EmployeeWageForMultipleCompanies dmart=new EmployeeWageForMultipleCompanies("Dmart",20,2,10);
 
+	private void computeEmpWage() {
 		//declaring variables
 		int empHours=0,totalEmpHours=0,totalWorkingDays=0;
-		while(totalEmpHours <= dmart.maxHoursPerMonth && totalWorkingDays <= dmart.numOfWorkingDays ) {
+		while(totalEmpHours <= maxHoursPerMonth && totalWorkingDays <= numOfWorkingDays ) {
 
 			totalWorkingDays++;
 			int empCheck=(int)Math.floor(Math.random()*10) % 3;
-
 
 			switch(empCheck){    
 			case  IS_FULL_TIME:    
@@ -50,12 +48,26 @@ public class EmployeeWageForMultipleCompanies{
 			totalEmpHours+=empHours;
 			System.out.println("Day#:" +totalWorkingDays+"Emp Hr :"+empHours);
 		}
-		int totalEmpWage=dmart.empRatePerour*totalEmpHours;
-		System.out.println("Total Employee Wage for Company " +dmart.company+  "  is  " +totalEmpWage);
+		int totalEmpWage=empRatePerour*totalEmpHours;
+		System.out.println("Total Employee Wage for Company " +company+  "  is  " +totalEmpWage);
+	
 
 	}
-}
 
+	public static void main(String[] args) {
+		EmployeeWageForMultipleCompanies dmart=new EmployeeWageForMultipleCompanies("Dmart",20,2,10);
+		EmployeeWageForMultipleCompanies reliance=new EmployeeWageForMultipleCompanies("Reliance",10,4,20);
+
+		dmart.computeEmpWage();
+		System.out.println(dmart);
+		reliance.computeEmpWage();
+		System.out.println(reliance);
+
+
+	}
+
+
+}
 
 
 
